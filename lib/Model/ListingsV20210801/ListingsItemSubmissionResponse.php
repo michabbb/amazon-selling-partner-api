@@ -124,7 +124,8 @@ class ListingsItemSubmissionResponse extends BaseModel implements ModelInterface
 
     const STATUS_ACCEPTED = 'ACCEPTED';
     const STATUS_INVALID = 'INVALID';
-    
+    const STATUS_VALID = 'VALID';
+
     
 
     /**
@@ -137,6 +138,7 @@ class ListingsItemSubmissionResponse extends BaseModel implements ModelInterface
         $baseVals = [
             self::STATUS_ACCEPTED,
             self::STATUS_INVALID,
+            self::STATUS_VALID,
         ];
 
         // This is necessary because Amazon does not consistently capitalize their

@@ -1386,9 +1386,9 @@ class ListingsV20210801Api extends BaseApi
      * @throws \InvalidArgumentException
      * @return \SellingPartnerApi\Model\ListingsV20210801\ListingsItemSubmissionResponse
      */
-    public function putListingsItem($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null)
+    public function putListingsItem($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null, $mode = null)
     {
-        $response = $this->putListingsItemWithHttpInfo($seller_id, $sku, $marketplace_ids, $body, $issue_locale);
+        $response = $this->putListingsItemWithHttpInfo($seller_id, $sku, $marketplace_ids, $body, $issue_locale, $mode);
         return $response;
     }
 
@@ -1405,9 +1405,9 @@ class ListingsV20210801Api extends BaseApi
      * @throws \InvalidArgumentException
      * @return array of \SellingPartnerApi\Model\ListingsV20210801\ListingsItemSubmissionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function putListingsItemWithHttpInfo($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null)
+    public function putListingsItemWithHttpInfo($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null, $mode = null)
     {
-        $request = $this->putListingsItemRequest($seller_id, $sku, $marketplace_ids, $body, $issue_locale);
+        $request = $this->putListingsItemRequest($seller_id, $sku, $marketplace_ids, $body, $issue_locale, $mode);
         $signedRequest = $this->config->signRequest(
             $request
         );
@@ -1689,7 +1689,7 @@ class ListingsV20210801Api extends BaseApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function putListingsItemRequest($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null)
+    public function putListingsItemRequest($seller_id, $sku, $marketplace_ids, $body, $issue_locale = null, $mode=null)
     {
         // verify the required parameter 'seller_id' is set
         if ($seller_id === null || (is_array($seller_id) && count($seller_id) === 0)) {
@@ -1739,6 +1739,11 @@ class ListingsV20210801Api extends BaseApi
             $queryParams['issueLocale'] = $issue_locale;
         }
 
+        if ($mode !== null) {
+            $queryParams['mode'] = $mode;
+        }
+
+        //   $queryParams['mode'] = 'VALIDATION_PREVIEW';
         // path params
         if ($seller_id !== null) {
             $resourcePath = str_replace(
